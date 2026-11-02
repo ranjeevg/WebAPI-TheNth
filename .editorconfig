@@ -68,3 +68,6 @@ dotnet_naming_rule.private_fields_should_be_underscore_camel_case.style = unders
 dotnet_naming_symbols.private_fields.applicable_kinds = field
 dotnet_naming_symbols.private_fields.applicable_accessibilities = private
 dotnet_diagnostic.CS8019.severity = error
+dotnet_diagnostic.CA1050.severity = none
+dotnet_diagnostic.RCS1037.severity = none
+dotnet_diagnostic.IDE1006.severity = none
