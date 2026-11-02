@@ -1,10 +1,14 @@
 using OpenApiUi;
+using The_API_Itself.Weather;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+builder.Services.AddHttpClient<IOpenWeatherService>
+    ( client => client.BaseAddress = new Uri("http://localhost:5276"));
 
 var app = builder.Build();
 
@@ -22,7 +26,7 @@ var summaries = new[]
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 };
 
-app.MapGet("/weatherforecast", () =>
+app.MapGet("/Weather/WeatherForecast", () =>
 {
     var forecast =  Enumerable.Range(1, 5).Select(index =>
         new WeatherForecast
