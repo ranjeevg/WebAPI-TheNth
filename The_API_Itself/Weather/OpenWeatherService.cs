@@ -15,7 +15,7 @@ public interface IOpenMeteoService
 {
     HttpClient Client { get; set; }
     
-    Task<OpenWeatherAPIResponse> GetWeatherForecast(
+    Task<OpenMeteoAPIResponse> GetWeatherForecast(
         double _lat, 
         double _long, 
         string timezone = "GMT-0800"
@@ -27,10 +27,10 @@ public sealed class OpenMeteoService(IHttpClientFactory _factory) : IOpenMeteoSe
     public HttpClient Client { get; set; } 
         = _factory.CreateClient("weather");
 
-    public async Task<OpenWeatherAPIResponse> GetWeatherForecast(
+    public async Task<OpenMeteoAPIResponse> GetWeatherForecast(
         double latitude, 
         double longitude,
-        string timezone = "GMT-0800"
+        string timezone = "UTC-0800"
     )
     
     {
@@ -62,9 +62,9 @@ public sealed class OpenMeteoService(IHttpClientFactory _factory) : IOpenMeteoSe
         try
         {
           var response = await Client
-            .GetFromJsonAsync<OpenWeatherAPIResponse>($"{APIURI}", token);
+            .GetFromJsonAsync<OpenMeteoAPIResponse>($"{APIURI}", token);
 
-            return response as OpenWeatherAPIResponse
+            return response as OpenMeteoAPIResponse
                 ?? throw new Exception("No data returned.");
         }
         // for debugging purposes only.

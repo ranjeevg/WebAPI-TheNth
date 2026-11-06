@@ -34,10 +34,24 @@ public sealed class UnitsUsed
     
     public string temperature_2m { get; set; }
         = string.Empty;
+    public string rainfall { get; set; }
+        = string.Empty;
+    public string apparent_temperature { get; set; }
+        = string.Empty;
+    public string precipitation_probability { get; set; }
+        = string.Empty;
+    public string precipitation { get; set; }
+        = string.Empty;
+    public string rain { get; set; }
+        = string.Empty;
+    public string showers { get; set; }
+        = string.Empty;
+    public string snowfall { get; set; }
+        = string.Empty;
 }
 
     
-public sealed class OpenWeatherAPIResponse
+public sealed class OpenMeteoAPIResponse
 {
     // basically 'header data' for coordinates and timezones and the like, 
     //  alongside another response model for the actual data.

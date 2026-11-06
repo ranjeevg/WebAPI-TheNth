@@ -30,13 +30,19 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+/// <summary>
+/// The 'Weather' API - consuming the OpenMeteo version.
+/// </summary>
+/// <returns>
+/// A <see cref="OpenMeteoAPIResponse"></see>, with each individual item requested being returned in individual arrays.
+/// </returns>
 app.MapGet("/Weather/GetWeatherForecast", async (IHttpClientFactory _factory) =>
 {
     var weatherService = new OpenMeteoService(_factory);
 
     try
     {
-        OpenWeatherAPIResponse forecast = await  weatherService
+        OpenMeteoAPIResponse forecast = await  weatherService
             .GetWeatherForecast(49.102, -123.1);
 
         return forecast;
