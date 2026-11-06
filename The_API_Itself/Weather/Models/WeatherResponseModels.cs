@@ -13,7 +13,7 @@ public sealed record WeatherAPIQueryParams
 public sealed class IndividualWeatherData
 {
     // the 'x-axis', as it were.
-    public ICollection<String> time { get; set; } = [];
+    public ICollection<DateTime> time { get; set; } = [];
 
     // each of these can be considered a 'y-axis' for the 'x-axis' above.
     // (each collection name corresponds to a param passed in the URI for the API call)
