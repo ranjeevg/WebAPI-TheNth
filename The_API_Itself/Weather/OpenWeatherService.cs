@@ -10,7 +10,7 @@ namespace The_API_Itself.Weather;
 /// <summary>
 /// An interface for a service to get weather data based on lat/long coordinates.
 /// </summary>
-public interface IOpenWeatherService
+public interface IOpenMeteoService
 
 {
     HttpClient Client { get; set; }
@@ -22,7 +22,7 @@ public interface IOpenWeatherService
     );
 }
 
-public sealed class OpenWeatherService(IHttpClientFactory _factory) : IOpenWeatherService
+public sealed class OpenMeteoService(IHttpClientFactory _factory) : IOpenMeteoService
 {    
     public HttpClient Client { get; set; } 
         = _factory.CreateClient("weather");

@@ -8,10 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
-builder.Services.AddTransient<IOpenWeatherService, OpenWeatherService>();
+builder.Services.AddTransient<IOpenMeteoService, OpenMeteoService>();
     
 builder.Services
-    .AddHttpClient<IOpenWeatherService, OpenWeatherService>("weather", client => 
+    .AddHttpClient<IOpenMeteoService, OpenMeteoService>("weather", client => 
     {
         client.BaseAddress = new Uri("https://api.open-meteo.com/v1/forecast");
         client.DefaultRequestHeaders.Add("Accept", "application/vnd.github.v3+json");
@@ -32,7 +32,7 @@ app.UseHttpsRedirection();
 
 app.MapGet("/Weather/GetWeatherForecast", async (IHttpClientFactory _factory) =>
 {
-    var weatherService = new OpenWeatherService(_factory);
+    var weatherService = new OpenMeteoService(_factory);
 
     try
     {
@@ -48,8 +48,3 @@ app.MapGet("/Weather/GetWeatherForecast", async (IHttpClientFactory _factory) =>
 .WithName("GetWeatherForecast");
 
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 9 * 5);
-}
