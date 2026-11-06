@@ -53,4 +53,42 @@ app.MapGet("/Weather/GetWeatherForecast", async (IHttpClientFactory _factory) =>
 })
 .WithName("GetWeatherForecast");
 
+/// <summary>
+/// A specific implementation with 
+/// </summary>
+/// <returns></returns>
+app.MapGet("/Weather/GetNorthPolarForecast", async (IHttpClientFactory _factory) => 
+{ 
+    var weatherService = new OpenMeteoService(_factory);
+
+    try
+    {
+        OpenMeteoAPIResponse polarForecast = await weatherService
+            .GetWeatherForecast(90.0000, 0.0000);
+        return polarForecast;
+    }
+    catch (Exception e)
+    {
+        throw new (e.Message);
+    }
+})
+.WithName("GetPolarWeatherForecast");
+
+app.MapGet("/Weather/GetSouthPoleForecast", async (IHttpClientFactory _factory) =>
+{
+    var weatherService = new OpenMeteoService(_factory);
+
+    try
+    {
+        OpenMeteoAPIResponse polarForecast = await weatherService
+            .GetWeatherForecast(-90.0000, 0.0000);
+        return polarForecast;
+    }
+    catch (Exception e)
+    {
+        throw new (e.Message);
+    }
+})
+.WithName("GetSouthPoleWeatherPredictions");
+
 app.Run();
