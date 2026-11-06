@@ -1,5 +1,6 @@
 using OpenApiUi;
 using The_API_Itself.Weather;
+using The_API_Itself.Weather.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
 
 builder.Services.AddHttpClient<IOpenWeatherService>
-    ( client => client.BaseAddress = new Uri("http://localhost:5276"));
+    (client => client.BaseAddress = new Uri("https://api.open-meteo.com/v1/forecast"));
+    
+builder.Services.AddTransient<OpenWeatherService>();
 
 var app = builder.Build();
 
@@ -26,17 +29,20 @@ var summaries = new[]
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 };
 
-app.MapGet("/Weather/WeatherForecast", () =>
+app.MapGet("/Weather/GetWeatherForecast", async (IHttpClientFactory _factory) =>
 {
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
+    var weatherService = new OpenWeatherService(_factory);
+
+    try
+    {
+        OpenWeatherAPIResponse forecast = await  weatherService
+            .GetWeatherForecast(49.102, -123.1);
+
+        return forecast;
+    }
+    catch (Exception e) {
+        throw new(e.Message);
+    }
 })
 .WithName("GetWeatherForecast");
 
@@ -44,5 +50,5 @@ app.Run();
 
 record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 {
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    public int TemperatureF => 32 + (int)(TemperatureC / 9 * 5);
 }
