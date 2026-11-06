@@ -19,8 +19,7 @@ public sealed class IndividualWeatherData
     // (each collection name corresponds to a param passed in the URI for the API call)
     public ICollection<float> temperature_2m { get; set; } = [];
     public ICollection<string> preciptiation_probability { get; set; } = [];
-    public ICollection<float> precipitation { get; set; } = [];
-    
+    public ICollection<float> precipitation { get; set; } = []; 
     public ICollection<float> rain { get; set; } = [];
     public ICollection<float> snowfall { get; set; } = [];
 
