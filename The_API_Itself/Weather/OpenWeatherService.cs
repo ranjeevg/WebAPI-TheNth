@@ -3,6 +3,7 @@ using System.Net.Http.Json;
 using The_API_Itself.Weather.Models;
 using System.Text.Json;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.AspNetCore.Mvc;
 
 namespace The_API_Itself.Weather;
 
@@ -23,9 +24,8 @@ public interface IOpenWeatherService
 
 public sealed class OpenWeatherService(IHttpClientFactory _factory) : IOpenWeatherService
 {    
-    public HttpClient Client { get; set; } = new() 
-        { BaseAddress = new Uri("https://api.open-meteo.com/v1/forecast") };
-
+    public HttpClient Client { get; set; } 
+        = _factory.CreateClient("weather");
 
     public async Task<OpenWeatherAPIResponse> GetWeatherForecast(
         double latitude, 
@@ -39,6 +39,7 @@ public sealed class OpenWeatherService(IHttpClientFactory _factory) : IOpenWeath
 
         // cancellation token 
         CancellationToken token = new();
+        token.ThrowIfCancellationRequested();
 
         Dictionary<string, string> queryParams = new Dictionary<string, string>
         {

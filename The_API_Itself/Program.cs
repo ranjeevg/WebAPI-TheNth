@@ -8,10 +8,16 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
-builder.Services.AddHttpClient<IOpenWeatherService>
-    (client => client.BaseAddress = new Uri("https://api.open-meteo.com/v1/forecast"));
+builder.Services.AddTransient<IOpenWeatherService, OpenWeatherService>();
     
-builder.Services.AddTransient<OpenWeatherService>();
+builder.Services
+    .AddHttpClient<IOpenWeatherService, OpenWeatherService>("weather", client => 
+    {
+        client.BaseAddress = new Uri("https://api.open-meteo.com/v1/forecast");
+        client.DefaultRequestHeaders.Add("Accept", "application/vnd.github.v3+json");
+        client.DefaultRequestHeaders.Add("User-Agent", "DotNet10App");
+        client.Timeout = TimeSpan.FromSeconds(30);
+     });
 
 var app = builder.Build();
 
@@ -23,11 +29,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
 
 app.MapGet("/Weather/GetWeatherForecast", async (IHttpClientFactory _factory) =>
 {
