@@ -11,7 +11,7 @@ builder.Services.AddOpenApi();
 builder.Services.AddTransient<IOpenMeteoService, OpenMeteoService>();
     
 builder.Services
-    .AddHttpClient<IOpenMeteoService, OpenMeteoService>("weather", client => 
+    .AddHttpClient<IOpenMeteoService, OpenMeteoService>("weatherForecastService", client => 
     {
         client.BaseAddress = new Uri("https://api.open-meteo.com/v1/forecast");
         client.DefaultRequestHeaders.Add("Accept", "application/vnd.github.v3+json");
@@ -53,10 +53,6 @@ app.MapGet("/Weather/GetWeatherForecast", async (IHttpClientFactory _factory) =>
 })
 .WithName("GetWeatherForecast");
 
-/// <summary>
-/// A specific implementation with 
-/// </summary>
-/// <returns></returns>
 app.MapGet("/Weather/GetNorthPolarForecast", async (IHttpClientFactory _factory) => 
 { 
     var weatherService = new OpenMeteoService(_factory);
@@ -65,6 +61,7 @@ app.MapGet("/Weather/GetNorthPolarForecast", async (IHttpClientFactory _factory)
     {
         OpenMeteoAPIResponse polarForecast = await weatherService
             .GetWeatherForecast(90.0000, 0.0000);
+
         return polarForecast;
     }
     catch (Exception e)
@@ -82,6 +79,7 @@ app.MapGet("/Weather/GetSouthPoleForecast", async (IHttpClientFactory _factory) 
     {
         OpenMeteoAPIResponse polarForecast = await weatherService
             .GetWeatherForecast(-90.0000, 0.0000);
+            
         return polarForecast;
     }
     catch (Exception e)

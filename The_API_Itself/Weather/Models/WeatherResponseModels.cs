@@ -22,11 +22,11 @@ public sealed class IndividualWeatherData
     public ICollection<float> precipitation { get; set; } = []; 
     public ICollection<float> rain { get; set; } = [];
     public ICollection<float> snowfall { get; set; } = [];
-
-
-
 }
 
+/// <summary>
+/// A placeholder object for the API response - specifically units for the query results.
+/// </summary>
 public sealed class UnitsUsed
 {
     public string time { get; set; } 
@@ -53,15 +53,23 @@ public sealed class UnitsUsed
     
 public sealed class OpenMeteoAPIResponse
 {
-    // basically 'header data' for coordinates and timezones and the like, 
-    //  alongside another response model for the actual data.
-
     public double latitude { get; set; }
     public double longitude { get; set; }
     public string timezone { get; set; }
         = "UTC-8";
+
+    /// <summary>
+    /// An object representing the units used for each array of data 
+    /// matched by name to the query results array in question.
+    /// </summary>
+    /// <value></value>
     public UnitsUsed hourly_units { get; set; }
         = new();
+
+    /// <summary>
+    /// An object with response arrays for each category queried, including a 'time' collection as a shared X-axis.
+    /// </summary>
+    /// <value></value>
     public IndividualWeatherData hourly { get; set; } 
         = new();
     

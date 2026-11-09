@@ -25,7 +25,7 @@ public interface IOpenMeteoService
 public sealed class OpenMeteoService(IHttpClientFactory _factory) : IOpenMeteoService
 {    
     public HttpClient Client { get; set; } 
-        = _factory.CreateClient("weather");
+        = _factory.CreateClient("weatherForecastService");
 
     public async Task<OpenMeteoAPIResponse> GetWeatherForecast(
         double latitude, 
