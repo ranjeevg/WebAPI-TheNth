@@ -1,9 +1,4 @@
-using System.Text.Json.Serialization;
-using System.Net.Http.Json;
 using The_API_Itself.Weather.Models;
-using System.Text.Json;
-using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.AspNetCore.Mvc;
 
 namespace The_API_Itself.Weather;
 
@@ -46,7 +41,7 @@ public sealed class OpenMeteoService(IHttpClientFactory _factory) : IOpenMeteoSe
             ["latitude"] = $"{latitude}",
             ["longitude"] = $"{longitude}",
             ["timezone"] = "UTC-8",
-            ["hourly"] = "temperature_2m,apparent_temperature,precipitation_probability,precipitation,rain,showers,snowfall"
+            ["hourly"] = "temperature_2m,precipitation,rain,snowfall"
         };
 
         var UriParams = queryParams
