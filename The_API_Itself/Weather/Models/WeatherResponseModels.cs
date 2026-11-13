@@ -17,11 +17,10 @@ public sealed class IndividualWeatherData
 
     // each of these can be considered a 'y-axis' for the 'x-axis' above.
     // (each collection name corresponds to a param passed in the URI for the API call)
-    public ICollection<float> temperature_2m { get; set; } = [];
-    public ICollection<string> preciptiation_probability { get; set; } = [];
-    public ICollection<float> precipitation { get; set; } = []; 
-    public ICollection<float> rain { get; set; } = [];
-    public ICollection<float> snowfall { get; set; } = [];
+    public ICollection<float>? temperature_2m { get; set; }
+    public ICollection<float>? precipitation { get; set; }
+    public ICollection<float>? rain { get; set; }
+    public ICollection<float>? snowfall { get; set; }
 }
 
 /// <summary>
@@ -37,8 +36,6 @@ public sealed class UnitsUsed
     public string rainfall { get; set; }
         = string.Empty;
     public string apparent_temperature { get; set; }
-        = string.Empty;
-    public string precipitation_probability { get; set; }
         = string.Empty;
     public string precipitation { get; set; }
         = string.Empty;
