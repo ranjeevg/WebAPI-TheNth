@@ -43,7 +43,7 @@ app.MapGet("/Weather/GetWeatherForecast", async (IHttpClientFactory _factory) =>
     try
     {
         OpenMeteoAPIResponse forecast = await  weatherService
-            .GetWeatherForecast(49.102, -123.1);
+            .GetWeatherForecast(49.1030268, -122.8486433);
 
         return forecast;
     }
