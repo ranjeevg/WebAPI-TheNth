@@ -40,7 +40,7 @@ public sealed class OpenMeteoService(IHttpClientFactory _factory) : IOpenMeteoSe
         {
             ["latitude"] = $"{latitude}",
             ["longitude"] = $"{longitude}",
-            ["timezone"] = "UTC-8",
+            ["timezone"] = "UTC-7",
             ["hourly"] = "temperature_2m,precipitation,rain,snowfall"
         };
 
