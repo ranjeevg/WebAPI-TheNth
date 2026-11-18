@@ -3,7 +3,7 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="10.0.14"/>
+    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="11.0.0"/>
     <PackageVersion Include="OpenApiUi" Version="2.0.5"/>
   </ItemGroup>
 </Project>
