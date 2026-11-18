@@ -13,7 +13,7 @@ public interface IOpenMeteoService
     Task<OpenMeteoAPIResponse> GetWeatherForecast(
         double _lat, 
         double _long, 
-        string timezone = "GMT-0800"
+        string timezone = "UTC-0700"
     );
 }
 
@@ -25,7 +25,7 @@ public sealed class OpenMeteoService(IHttpClientFactory _factory) : IOpenMeteoSe
     public async Task<OpenMeteoAPIResponse> GetWeatherForecast(
         double latitude, 
         double longitude,
-        string timezone = "UTC-0800"
+        string timezone = "UTC-0700"
     )
     
     {
