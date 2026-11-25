@@ -8,9 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
-builder.Services.AddTransient<IOpenMeteoService, OpenMeteoService>();
+builder.Services.AddTransient<IWeatherService, OpenMeteoService>();
     
-builder.Services.AddHttpClient<IOpenMeteoService, OpenMeteoService>("weatherForecastService", client => 
+builder.Services.AddHttpClient<IWeatherService, OpenMeteoService>("weatherForecastService", client => 
 {
     client.BaseAddress = new Uri("https://api.open-meteo.com/v1/forecast");
     client.DefaultRequestHeaders.Add("Accept", "application/vnd.github.v3+json");
