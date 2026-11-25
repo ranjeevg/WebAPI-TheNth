@@ -28,23 +28,23 @@ public sealed class IndividualWeatherData
 /// </summary>
 public sealed class UnitsUsed
 {
-    public string time { get; set; } 
+    public string? time { get; set; } 
         = DateTime.MinValue.ToString("yyyy-MM-ddThh:mm tt");
     
-    public string temperature_2m { get; set; }
-        = string.Empty;
-    public string rainfall { get; set; }
-        = string.Empty;
-    public string apparent_temperature { get; set; }
-        = string.Empty;
-    public string precipitation { get; set; }
-        = string.Empty;
-    public string rain { get; set; }
-        = string.Empty;
-    public string showers { get; set; }
-        = string.Empty;
-    public string snowfall { get; set; }
-        = string.Empty;
+    public string? temperature_2m { get; set; }
+        
+    public string? rainfall { get; set; }
+        
+    public string? apparent_temperature { get; set; }
+        
+    public string? precipitation { get; set; }
+        
+    public string? rain { get; set; }
+        
+    public string? showers { get; set; }
+        
+    public string? snowfall { get; set; }
+        
 }
 
     
@@ -52,7 +52,7 @@ public sealed class OpenMeteoAPIResponse
 {
     public double latitude { get; set; }
     public double longitude { get; set; }
-    public string timezone { get; set; }
+    public string? timezone { get; set; }
         = "UTC-8";
 
     /// <summary>
